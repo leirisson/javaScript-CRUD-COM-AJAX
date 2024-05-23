@@ -1,26 +1,12 @@
 const tabela = document.querySelector("[data-tabela]");
 
+
 const listaDeClientes = () => {
-    const promisse = new Promise((resolve, reject) => {
-
-        const http = new XMLHttpRequest();
-        
-        http.open('GET', 'http://localhost:3000/profile');
-
-        http.onload = () => {
-            if (http.status >= 400) {
-                reject(JSON.parse(http.response))
-            } else {
-                resolve(JSON.parse(http.response))
-            }
-        };
-
-        http.send();
+    return fetch(`http://localhost:3000/profile`)
+    .then(response => {
+        return response.json()
     })
-    return promisse;
-}
-
-
+};
 
 listaDeClientes()
     .then(dadosCliente => {
